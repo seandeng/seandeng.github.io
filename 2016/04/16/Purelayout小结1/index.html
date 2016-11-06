@@ -1,0 +1,740 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta name="baidu-site-verification" content="UZtJCXgxQh" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Purelayout," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="我们通常用xib文件来布局，但碰到动态的视图总是使用代码方式的AutoLayout。 很多公司还使用了 比较重的框架 比如Masonry.现在在做的项目中用的是一种比较轻量级别的布局类库，举一个布局的例子
+上边的是view1 下边的是view2">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Purelayout小结1">
+<meta property="og:url" content="http://seandeng.com/2016/04/16/Purelayout小结1/index.html">
+<meta property="og:site_name" content="Aragorn's notes">
+<meta property="og:description" content="我们通常用xib文件来布局，但碰到动态的视图总是使用代码方式的AutoLayout。 很多公司还使用了 比较重的框架 比如Masonry.现在在做的项目中用的是一种比较轻量级别的布局类库，举一个布局的例子
+上边的是view1 下边的是view2">
+<meta property="og:image" content="http://7xt1bu.com2.z0.glb.clouddn.com/5.png">
+<meta property="og:image" content="http://7xt1bu.com2.z0.glb.clouddn.com/4.png">
+<meta property="og:updated_time" content="2016-04-24T03:49:56.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Purelayout小结1">
+<meta name="twitter:description" content="我们通常用xib文件来布局，但碰到动态的视图总是使用代码方式的AutoLayout。 很多公司还使用了 比较重的框架 比如Masonry.现在在做的项目中用的是一种比较轻量级别的布局类库，举一个布局的例子
+上边的是view1 下边的是view2">
+<meta name="twitter:image" content="http://7xt1bu.com2.z0.glb.clouddn.com/5.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"always"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+  <title> Purelayout小结1 | Aragorn's notes </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?ca894c844ac70d7ca815b0096a680219";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta custom-logo">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Aragorn's notes</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Quick notes</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-collect">
+          <a href="/collect" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            收集
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Purelayout小结1
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-04-16T23:51:14+08:00" content="2016-04-16">
+              2016-04-16
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/04/16/Purelayout小结1/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/16/Purelayout小结1/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/04/16/Purelayout小结1/" class="leancloud_visitors" data-flag-title="Purelayout小结1">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>我们通常用xib文件来布局，但碰到动态的视图总是使用代码方式的AutoLayout。 很多公司还使用了 比较重的框架 比如Masonry.<br>现在在做的项目中用的是一种比较轻量级别的布局类库，举一个布局的例子</p>
+<p>上边的是view1 下边的是view2</p>
+<a id="more"></a>
+<p><img src="http://7xt1bu.com2.z0.glb.clouddn.com/5.png" alt=""></p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)viewDidLoad &#123;</span><br><span class="line">  [<span class="keyword">super</span> viewDidLoad];</span><br><span class="line"></span><br><span class="line">  <span class="comment">//创建两个View</span></span><br><span class="line">  <span class="built_in">UIView</span> *view1 = [<span class="keyword">self</span> createView];</span><br><span class="line">  <span class="built_in">UIView</span> *view2 = [<span class="keyword">self</span> createView];</span><br><span class="line"></span><br><span class="line">  <span class="comment">//addSubview</span></span><br><span class="line">  [<span class="keyword">self</span>.view addSubview:view1];</span><br><span class="line">  [<span class="keyword">self</span>.view addSubview:view2];</span><br><span class="line"></span><br><span class="line">  <span class="comment">//设置view1高度为70</span></span><br><span class="line">  [view1 autoSetDimension:ALDimensionHeight toSize:<span class="number">70.0</span>];</span><br><span class="line"></span><br><span class="line">  <span class="comment">//view1和view2都都距离父view边距为20</span></span><br><span class="line">  ALEdgeInsets defInsets = ALEdgeInsetsMake(<span class="number">20.0</span>, <span class="number">20.0</span>, <span class="number">20.0</span>, <span class="number">20.0</span>);</span><br><span class="line">  <span class="comment">//view1 底部边距无效</span></span><br><span class="line">  [view1 autoPinEdgesToSuperviewEdgesWithInsets:defInsets excludingEdge:ALEdgeBottom];</span><br><span class="line">  <span class="comment">//view2 顶部边距无效</span></span><br><span class="line">  [view2 autoPinEdgesToSuperviewEdgesWithInsets:defInsets excludingEdge:ALEdgeTop];</span><br><span class="line"></span><br><span class="line">  <span class="comment">//两个view之间距离也是20</span></span><br><span class="line">  [view2 autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:view1 withOffset:defInsets.bottom];</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	<span class="comment">// Do any additional setup after loading the view, typically from a nib.</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (<span class="built_in">UIView</span>*)createView &#123;</span><br><span class="line">  <span class="comment">//有Autolayout不需要设置frame</span></span><br><span class="line">  <span class="built_in">UIView</span> *view = [<span class="built_in">UIView</span> new];</span><br><span class="line">  view.backgroundColor = [<span class="built_in">UIColor</span> blueColor];</span><br><span class="line">  <span class="comment">//不允许AutoresizingMask转换成Autolayout, PureLayout内部也会帮你设置的。</span></span><br><span class="line">  view.translatesAutoresizingMaskIntoConstraints = <span class="literal">NO</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> view;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="http://7xt1bu.com2.z0.glb.clouddn.com/4.png" alt=""></p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//蓝色的view置于父视图的中央</span></span><br><span class="line">[<span class="keyword">self</span>.blueView autoCenterInSuperview];  </span><br><span class="line"><span class="comment">//蓝色view的大小是宽50高50</span></span><br><span class="line">[<span class="keyword">self</span>.blueView autoSetDimensionsToSize:<span class="built_in">CGSizeMake</span>(<span class="number">50.0</span>, <span class="number">50.0</span>)];   </span><br><span class="line"></span><br><span class="line"><span class="comment">//红色view的顶部是蓝色view的底部</span></span><br><span class="line">[View autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:<span class="keyword">self</span>.blueView]; </span><br><span class="line"><span class="comment">//红色view的左边是蓝色view的右边</span></span><br><span class="line">[<span class="keyword">self</span>.redView autoPinEdge:ALEdgeLeft toEdge:ALEdgeRight ofView:<span class="keyword">self</span>.blueView]; </span><br><span class="line"><span class="comment">//红色view和蓝色view同宽</span></span><br><span class="line">[<span class="keyword">self</span>.redView autoMatchDimension:ALDimensionWidth toDimension:ALDimensionWidth ofView:<span class="keyword">self</span>.blueView];</span><br><span class="line"><span class="comment">//红色view的高度是40  </span></span><br><span class="line">[<span class="keyword">self</span>.redView autoSetDimension:ALDimensionHeight toSize:<span class="number">40.0</span>];</span><br><span class="line"></span><br><span class="line"><span class="comment">//黄色的顶部 距离红色 底部距离为10</span></span><br><span class="line">[<span class="keyword">self</span>.yellowView autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:<span class="keyword">self</span>.redView withOffset:<span class="number">10.0</span>];</span><br><span class="line"></span><br><span class="line"><span class="comment">// 黄色 高度 25</span></span><br><span class="line">[<span class="keyword">self</span>.yellowView autoSetDimension:ALDimensionHeight toSize:<span class="number">25.0</span>];</span><br><span class="line"></span><br><span class="line"><span class="comment">// 黄色 与父亲左边距20</span></span><br><span class="line">[<span class="keyword">self</span>.yellowView autoPinEdgeToSuperviewEdge:ALEdgeLeft withInset:<span class="number">20.0</span>];</span><br><span class="line"></span><br><span class="line"><span class="comment">//黄色 与父视图右边距20</span></span><br><span class="line">[<span class="keyword">self</span>.yellowView autoPinEdgeToSuperviewEdge:ALEdgeRight withInset:<span class="number">20.0</span>]; </span><br><span class="line"></span><br><span class="line"><span class="comment">//绿色顶部距黄色底部距离20 </span></span><br><span class="line">[<span class="keyword">self</span>.greenView autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:<span class="keyword">self</span>.yellowView withOffset:<span class="number">10.0</span>];</span><br><span class="line"></span><br><span class="line"><span class="comment">//绿色位于父视图的水平中心</span></span><br><span class="line">[<span class="keyword">self</span>.greenView autoAlignAxisToSuperviewAxis:ALAxisVertical];</span><br><span class="line"><span class="comment">//绿色 的高度是 黄色的 两倍</span></span><br><span class="line">[<span class="keyword">self</span>.greenView autoMatchDimension:ALDimensionHeight toDimension:ALDimensionHeight ofView:<span class="keyword">self</span>.yellowView withMultiplier:<span class="number">2.0</span>];</span><br><span class="line"></span><br><span class="line"><span class="comment">//绿色 的宽度是 150</span></span><br><span class="line">[<span class="keyword">self</span>.greenView autoSetDimension:ALDimensionWidth toSize:<span class="number">150.0</span>];</span><br></pre></td></tr></table></figure>
+<p>简单好用，不过要注意的一些点：<br>1.purelayout提供的方法有些是只支持iOS8及以上的，如果iOS7及以下的调用了是会奔溃的。<br>2.在view父容器为nil的时候，执行purelayout的方法会崩溃。所以很多时候要先把view加入到父视图中后，再去使用prelayout方法，这样父视图不会为nil。</p>
+
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Purelayout/" rel="tag">#Purelayout</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/04/16/name-com-DNSPod/" rel="next" title="name.com + DNSPod">
+                <i class="fa fa-chevron-left"></i> name.com + DNSPod
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/04/17/Routable-iOS/" rel="prev" title="Routable-iOS">
+                Routable-iOS <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/04/16/Purelayout小结1/"
+           data-title="Purelayout小结1" data-url="http://seandeng.com/2016/04/16/Purelayout小结1/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="Aragorn" />
+          <p class="site-author-name" itemprop="name">Aragorn</p>
+          <p class="site-description motion-element" itemprop="description">匠心</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">32</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">17</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        <div class="links-of-blogroll motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <p class="post-toc-empty">此文章未包含目录</p>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Aragorn</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+<script>
+(function(){
+    var bp = document.createElement('script');
+    bp.src = '//push.zhanzhang.baidu.com/push.js';
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"seandeng"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("6SL8Hg8C37NhcH6QDt7vkLLH-gzGzoHsz", "sxonDECxMyekmDJpMFV2U03o");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+</body>
+</html>
