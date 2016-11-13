@@ -87,7 +87,7 @@
 <meta property="og:url" content="http://seandeng.com/2016/11/13/time/index.html">
 <meta property="og:site_name" content="Aragorn's notes">
 <meta property="og:description" content="NSDate对象存放的日期始终是UTC的标准时间，可以根据这个时间进行其它时间的转换所以debug去查看容易被误导 需要转换成string查看">
-<meta property="og:updated_time" content="2016-11-13T11:13:23.000Z">
+<meta property="og:updated_time" content="2016-11-13T11:16:41.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="UTC 时间">
 <meta name="twitter:description" content="NSDate对象存放的日期始终是UTC的标准时间，可以根据这个时间进行其它时间的转换所以debug去查看容易被误导 需要转换成string查看">
@@ -315,7 +315,8 @@
       
         <p>NSDate对象存放的日期始终是UTC的标准时间，可以根据这个时间进行其它时间的转换<br>所以debug去查看容易被误导 需要转换成string查看<br><a id="more"></a></p>
 <p>NSDateFormatter <em>dateFormatter = [[NSDateFormatter alloc] init];<br>[dateFormatter setDateFormat:@”yyyy-MM-dd’T’HH:mm:ssZ”];<br>NSDate </em>localDate = [dateFormatter dateFromString:@”2016-11-13T17:43:00+0000”];<br>NSLog(@”now Time = %@”,[self getNowDateFromatAnDate:localDate]);</p>
-<p>我现在在北京时间东八区 2016-11-13T17:43:00+0000 的字符串在 nsdate 类型里就是 2016-11-13 17:43:00 +0000 本地时间 2016-11-14 01:43:00 +0000<br>我现在在北京时间东八区 2016-11-13T17:43:00+0800 的字符串在 nsdate 类型里就是 2016-11-13 09:43:00 +0000 本地四件 2016-11-13 17:43:00 +0000</p>
+<p>我现在在北京时间东八区 2016-11-13T17:43:00+0000 的字符串在 nsdate 类型里就是 2016-11-13 17:43:00 +0000 本地时间 2016-11-14 01:43:00 +0000<br>我现在在北京时间东八区 2016-11-13T17:43:00+0800 的字符串在 nsdate 类型里就是 2016-11-13 09:43:00 +0000 本地时间 2016-11-13 17:43:00 +0000</p>
+<p>如果后面 是＋0800也就是和你所在时区一致的话，那么转换出来的本地时间时分秒也是一样的。</p>
 <p>一些常用函数</p>
 <pre><code>//NSString 2 NSDate
 - (NSDate *)stringToDate:(NSString *)strdate
