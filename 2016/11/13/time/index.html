@@ -65,7 +65,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="国际化," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -81,25 +81,16 @@
 
 
 
-<meta name="description" content="iOS国际化
-storyboard 和 xib文件的国际化">
+<meta name="description" content="NSDate对象存放的日期始终是UTC的标准时间，可以根据这个时间进行其它时间的转换所以debug去查看容易被误导 需要转换成string查看">
 <meta property="og:type" content="article">
-<meta property="og:title" content="storyboard 和 xib文件的国际化">
-<meta property="og:url" content="http://seandeng.com/2016/10/30/AutoGenStrings/index.html">
+<meta property="og:title" content="UTC 时间">
+<meta property="og:url" content="http://seandeng.com/2016/11/13/time/index.html">
 <meta property="og:site_name" content="Aragorn's notes">
-<meta property="og:description" content="iOS国际化
-storyboard 和 xib文件的国际化">
-<meta property="og:image" content="http://7xt1bu.com1.z0.glb.clouddn.com/36.png">
-<meta property="og:image" content="http://7xt1bu.com1.z0.glb.clouddn.com/37.png">
-<meta property="og:image" content="http://7xt1bu.com1.z0.glb.clouddn.com/38.png">
-<meta property="og:image" content="http://7xt1bu.com1.z0.glb.clouddn.com/39.png">
-<meta property="og:image" content="http://7xt1bu.com1.z0.glb.clouddn.com/40.png">
-<meta property="og:updated_time" content="2016-10-30T02:31:56.000Z">
+<meta property="og:description" content="NSDate对象存放的日期始终是UTC的标准时间，可以根据这个时间进行其它时间的转换所以debug去查看容易被误导 需要转换成string查看">
+<meta property="og:updated_time" content="2016-11-13T11:13:23.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="storyboard 和 xib文件的国际化">
-<meta name="twitter:description" content="iOS国际化
-storyboard 和 xib文件的国际化">
-<meta name="twitter:image" content="http://7xt1bu.com1.z0.glb.clouddn.com/36.png">
+<meta name="twitter:title" content="UTC 时间">
+<meta name="twitter:description" content="NSDate对象存放的日期始终是UTC的标准时间，可以根据这个时间进行其它时间的转换所以debug去查看容易被误导 需要转换成string查看">
 
 
 
@@ -116,7 +107,7 @@ storyboard 和 xib文件的国际化">
     }
   };
 </script>
-  <title> storyboard 和 xib文件的国际化 | Aragorn's notes </title>
+  <title> UTC 时间 | Aragorn's notes </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -266,7 +257,7 @@ storyboard 和 xib文件的国际化">
             
             
               
-                storyboard 和 xib文件的国际化
+                UTC 时间
               
             
           </h1>
@@ -278,8 +269,8 @@ storyboard 和 xib文件的国际化">
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-10-30T09:28:53+08:00" content="2016-10-30">
-              2016-10-30
+            <time itemprop="dateCreated" datetime="2016-11-13T18:19:53+08:00" content="2016-11-13">
+              2016-11-13
             </time>
           </span>
 
@@ -289,8 +280,8 @@ storyboard 和 xib文件的国际化">
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/10/30/AutoGenStrings/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/30/AutoGenStrings/" itemprop="commentsCount"></span>
+                <a href="/2016/11/13/time/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/13/time/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -300,7 +291,7 @@ storyboard 和 xib文件的国际化">
 
           
           
-             <span id="/2016/10/30/AutoGenStrings/" class="leancloud_visitors" data-flag-title="storyboard 和 xib文件的国际化">
+             <span id="/2016/11/13/time/" class="leancloud_visitors" data-flag-title="UTC 时间">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -322,27 +313,67 @@ storyboard 和 xib文件的国际化">
       
 
       
-        <p>iOS国际化</p>
-<p>storyboard 和 xib文件的国际化<br><a id="more"></a><br>每种语言定制一套Storyboard会造成以后需求变更的时候需要同时修改其它语言，比较麻烦。<br>所以采用的是 基于基础的Base StoryBoard以及每种语言一套strings</p>
-<p><img src="http://7xt1bu.com1.z0.glb.clouddn.com/36.png" alt=""></p>
-<p>xib也是一样</p>
-<p><img src="http://7xt1bu.com1.z0.glb.clouddn.com/37.png" alt=""></p>
-<p>不过，相应语言的strings一旦生成后，Base Storyboard或者 Base Xib有任何编辑都不会影响到strings，这就意味着如果我们删除或添加了一个UILabel的text，strings也不能同步改动。</p>
-<p>实际上，storyboard的翻译是由ibtool工具生成的，你可以用terminal进入storyboard所在的目录，输入下面指令，就可以得到一个新的翻译文本</p>
-<blockquote>
-<p>ibtool Main.storyboard –generate-strings-file ./NewTemp.string</p>
-</blockquote>
-<p>但是ibtool生成的strings文件是BaseStoryboard的strings(默认语言的strings)，且会把我们原来的strings替换掉。所以我们要做的就是把新生成的strings与旧的strings进行冲突处理(新的附加上，删除掉的注释掉)，这一切可以用这个python脚本来实现，见<a href="https://raw.githubusercontent.com/mokai/iOS-i18n/master/i18n/RunScript/AutoGenStrings.py" target="_blank" rel="external">AutoGenStrings.py</a>。然后我们将借助Xcode 中 Run Script来运行这段脚本。这样每次Build时都会保证语言strings与Base Storyboard保持一致。</p>
-<p>图中有两个脚本的目的是 storyboard和xib都需要生成一套strings。 需要生成xib的可以修改一下AutoGenStrings.py里的文件类型。</p>
-<p><img src="http://7xt1bu.com1.z0.glb.clouddn.com/38.png" alt=""></p>
-<p><img src="http://7xt1bu.com1.z0.glb.clouddn.com/39.png" alt=""></p>
-<p>strings 使用 key 和 map的格式</p>
-<p><img src="http://7xt1bu.com1.z0.glb.clouddn.com/40.png" alt=""></p>
-<p>这样再配合上Localizable.strings就基本可以做好整个项目的国际化了。还是比较方便的。</p>
-<p>下次有空了再实践下应用内直接切换语言的办法。</p>
-<p>参考:</p>
-<p><a href="http://www.cnblogs.com/levilinxi/p/4296712.html" target="_blank" rel="external">通过脚本使storyboard翻译自增</a></p>
+        <p>NSDate对象存放的日期始终是UTC的标准时间，可以根据这个时间进行其它时间的转换<br>所以debug去查看容易被误导 需要转换成string查看<br><a id="more"></a></p>
+<p>NSDateFormatter <em>dateFormatter = [[NSDateFormatter alloc] init];<br>[dateFormatter setDateFormat:@”yyyy-MM-dd’T’HH:mm:ssZ”];<br>NSDate </em>localDate = [dateFormatter dateFromString:@”2016-11-13T17:43:00+0000”];<br>NSLog(@”now Time = %@”,[self getNowDateFromatAnDate:localDate]);</p>
+<p>我现在在北京时间东八区 2016-11-13T17:43:00+0000 的字符串在 nsdate 类型里就是 2016-11-13 17:43:00 +0000 本地时间 2016-11-14 01:43:00 +0000<br>我现在在北京时间东八区 2016-11-13T17:43:00+0800 的字符串在 nsdate 类型里就是 2016-11-13 09:43:00 +0000 本地四件 2016-11-13 17:43:00 +0000</p>
+<p>一些常用函数</p>
+<pre><code>//NSString 2 NSDate
+- (NSDate *)stringToDate:(NSString *)strdate
+{
+    NSDateFormatter *dateFormatter = [[NSDateFormatteralloc] init];
+    [dateFormatter setDateFormat:@&quot;yyyy-MM-dd HH:mm:ss&quot;];
+    NSDate *retdate = [dateFormatter dateFromString:strdate];
+    [dateFormatter release];
+    return retdate;
+}
 
+//NSDate 2 NSString
+- (NSString *)dateToString:(NSDate *)date
+{
+    NSDateFormatter *dateFormatter = [[NSDateFormatteralloc] init];
+    [dateFormatter setDateFormat:@&quot;yyyy-MM-dd HH:mm:ss&quot;];
+    NSString *strDate = [dateFormatter stringFromDate:date];
+    [dateFormatter release];
+    return strDate;
+}
+
+//将本地日期字符串转为UTC日期字符串  
+//本地日期格式:2013-08-03 12:53:51  
+//可自行指定输入输出格式  
+-(NSString *)getUTCFormateLocalDate:(NSString *)localDate  
+{  
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];  
+    //输入格式  
+    [dateFormatter setDateFormat:@&quot;yyyy-MM-dd HH:mm:ss&quot;];  
+
+    NSDate *dateFormatted = [dateFormatter dateFromString:localDate];  
+    NSTimeZone *timeZone = [NSTimeZone timeZoneWithName:@&quot;UTC&quot;];  
+    [dateFormatter setTimeZone:timeZone];  
+    //输出格式  
+    [dateFormatter setDateFormat:@&quot;yyyy-MM-dd&apos;T&apos;HH:mm:ssZ&quot;];  
+    NSString *dateString = [dateFormatter stringFromDate:dateFormatted];  
+    [dateFormatter release];  
+    return dateString;  
+}  
+
+//将UTC日期字符串转为本地时间字符串  
+//输入的UTC日期格式2013-08-03T04:53:51+0000  
+-(NSString *)getLocalDateFormateUTCDate:(NSString *)utcDate  
+{  
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];  
+    //输入格式  
+    [dateFormatter setDateFormat:@&quot;yyyy-MM-dd&apos;T&apos;HH:mm:ssZ&quot;];  
+    NSTimeZone *localTimeZone = [NSTimeZone localTimeZone];  
+    [dateFormatter setTimeZone:localTimeZone];  
+
+    NSDate *dateFormatted = [dateFormatter dateFromString:utcDate];  
+    //输出格式  
+    [dateFormatter setDateFormat:@&quot;yyyy-MM-dd HH:mm:ss&quot;];  
+    NSString *dateString = [dateFormatter stringFromDate:dateFormatted];  
+    [dateFormatter release];  
+    return dateString;  
+}  
+</code></pre>
       
     </div>
     
@@ -360,28 +391,18 @@ storyboard 和 xib文件的国际化">
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/国际化/" rel="tag">#国际化</a>
-          
-        </div>
-      
 
       
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/10/23/progressView/" rel="next" title="渐变环形进度条">
-                <i class="fa fa-chevron-left"></i> 渐变环形进度条
+              <a href="/2016/11/06/SocketRocket/" rel="next" title="SocketRocket">
+                <i class="fa fa-chevron-left"></i> SocketRocket
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/11/06/SocketRocket/" rel="prev" title="SocketRocket">
-                SocketRocket <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -407,8 +428,8 @@ storyboard 和 xib文件的国际化">
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/10/30/AutoGenStrings/"
-           data-title="storyboard 和 xib文件的国际化" data-url="http://seandeng.com/2016/10/30/AutoGenStrings/">
+      <div class="ds-thread" data-thread-key="2016/11/13/time/"
+           data-title="UTC 时间" data-url="http://seandeng.com/2016/11/13/time/">
       </div>
     
   </div>
