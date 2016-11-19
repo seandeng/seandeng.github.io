@@ -81,15 +81,16 @@
 
 
 
-<meta name="description" content="匠心">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Aragorn's notes">
-<meta property="og:url" content="http://seandeng.com/tags/YTKKeyValueStore/index.html">
+<meta name="description" content="Hexo使用next主题后 今天发现网站打不开了vendors目录下文件全部404">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo NEXT Theme 404">
+<meta property="og:url" content="http://seandeng.com/2016/11/19/next404/index.html">
 <meta property="og:site_name" content="Aragorn's notes">
-<meta property="og:description" content="匠心">
+<meta property="og:description" content="Hexo使用next主题后 今天发现网站打不开了vendors目录下文件全部404">
+<meta property="og:updated_time" content="2016-11-19T14:50:38.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Aragorn's notes">
-<meta name="twitter:description" content="匠心">
+<meta name="twitter:title" content="Hexo NEXT Theme 404">
+<meta name="twitter:description" content="Hexo使用next主题后 今天发现网站打不开了vendors目录下文件全部404">
 
 
 
@@ -106,7 +107,7 @@
     }
   };
 </script>
-  <title> 标签: YTKKeyValueStore | Aragorn's notes </title>
+  <title> Hexo NEXT Theme 404 | Aragorn's notes </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -137,7 +138,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left  ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -235,46 +236,140 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-collapse">
-    <div class="collection-title">
-      <h2 >
-        YTKKeyValueStore
-        <small>标签</small>
-      </h2>
-    </div>
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
 
     
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Hexo NEXT Theme 404
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-11-19T22:43:38+08:00" content="2016-11-19">
+              2016-11-19
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/11/19/next404/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/19/next404/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/11/19/next404/" class="leancloud_visitors" data-flag-title="Hexo NEXT Theme 404">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
       
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+      
+        <p>Hexo使用next主题后 今天发现网站打不开了<br>vendors目录下文件全部404<br><a id="more"></a><br>GitHub Pages 过滤掉了 source/vendors 目录的访问，所以next主题下的source下的vendors目录不能够被访问到，所以就出现了本地hexo s能够正常访问，但是deploy到github就是一片空白，按f12，可以看到大量来自source/vendors的css和js提示404</p>
+<p>找到解决方案了。。<br>首先修改source/vendors为source/lib，然后修改_config.yml， 将 _internal: vendors修改为_internal:lib<br>然后修改next底下所有引用source/vendors路径为source/lib。</p>
+<ol>
+<li>Hexo\themes\next.bowerrc </li>
+<li>Hexo\themes\next.gitignore </li>
+<li>Hexo\themes\next.javascript_ignore </li>
+<li>Hexo\themes\next\bower.json </li>
+</ol>
+<p>修改完毕后，刷新重新hexo g</p>
+<p>参考:</p>
+<p><a href="https://github.com/hexojs/hexo/issues/2238" target="_blank" rel="external">https://github.com/hexojs/hexo/issues/2238</a></p>
 
-      <h1 class="post-title">
+      
+    </div>
+    
+    <div>
+      
         
-            <a class="post-title-link" href="/2016/05/29/localCache/" itemprop="url">
-              
-                <span itemprop="name">使用 YTKKeyValueStore 做 iOS离线缓存</span>
-              
-            </a>
+      
+    </div>
+
+    <div>
+      
         
-      </h1>
+      
+    </div>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-05-29T07:48:29+08:00"
-              content="2016-05-29" >
-          05-29
-        </time>
-      </div>
+    <footer class="post-footer">
+      
 
-    </header>
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/11/13/time/" rel="next" title="UTC 时间">
+                <i class="fa fa-chevron-left"></i> UTC 时间
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </article>
 
 
-    
-  </div>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -282,6 +377,14 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/11/19/next404/"
+           data-title="Hexo NEXT Theme 404" data-url="http://seandeng.com/2016/11/19/next404/">
+      </div>
+    
+  </div>
+
 
         </div>
         
@@ -301,8 +404,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.jpg"
@@ -347,6 +459,17 @@
 
       </section>
 
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <p class="post-toc-empty">此文章未包含目录</p>
+            
+          </div>
+        </section>
       
 
     </div>
@@ -460,6 +583,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
 
   
 
