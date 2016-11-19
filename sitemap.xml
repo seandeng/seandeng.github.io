@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://seandeng.com/collect/index.html</loc>
+    
+    <lastmod>2016-11-19T14:55:45.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://seandeng.com/2016/11/19/next404/</loc>
     
     <lastmod>2016-11-19T14:50:38.000Z</lastmod>
@@ -61,13 +68,6 @@
     <loc>http://seandeng.com/2016/09/17/presentAnimation/</loc>
     
     <lastmod>2016-09-17T06:32:37.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://seandeng.com/collect/index.html</loc>
-    
-    <lastmod>2016-09-16T15:32:46.000Z</lastmod>
     
   </url>
   
