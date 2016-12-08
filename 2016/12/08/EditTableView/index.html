@@ -65,7 +65,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="国际化," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -81,25 +81,31 @@
 
 
 
-<meta name="description" content="iOS国际化
-storyboard 和 xib文件的国际化">
+<meta name="description" content="UITableView 的编辑模式下，左滑一个cell，会看到一个红底白字的删除，如果要简单的修改这个样式，可以采取下面这样的方法。直接修改subview，快速有效。
+-(void)layoutSubviews{
+    [super layoutSubviews];
+
+    for (UIView *subView in self.subviews) {
+        if ([subVie">
 <meta property="og:type" content="article">
-<meta property="og:title" content="storyboard 和 xib文件的国际化">
-<meta property="og:url" content="http://seandeng.com/2016/10/30/AutoGenStrings/index.html">
+<meta property="og:title" content="自定义 UITableView 的编辑模式">
+<meta property="og:url" content="http://seandeng.com/2016/12/08/EditTableView/index.html">
 <meta property="og:site_name" content="Aragorn's notes">
-<meta property="og:description" content="iOS国际化
-storyboard 和 xib文件的国际化">
-<meta property="og:image" content="http://7xt1bu.com1.z0.glb.clouddn.com/36.png">
-<meta property="og:image" content="http://7xt1bu.com1.z0.glb.clouddn.com/37.png">
-<meta property="og:image" content="http://7xt1bu.com1.z0.glb.clouddn.com/38.png">
-<meta property="og:image" content="http://7xt1bu.com1.z0.glb.clouddn.com/39.png">
-<meta property="og:image" content="http://7xt1bu.com1.z0.glb.clouddn.com/40.png">
-<meta property="og:updated_time" content="2016-10-30T02:31:56.000Z">
+<meta property="og:description" content="UITableView 的编辑模式下，左滑一个cell，会看到一个红底白字的删除，如果要简单的修改这个样式，可以采取下面这样的方法。直接修改subview，快速有效。
+-(void)layoutSubviews{
+    [super layoutSubviews];
+
+    for (UIView *subView in self.subviews) {
+        if ([subVie">
+<meta property="og:updated_time" content="2016-12-08T14:57:53.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="storyboard 和 xib文件的国际化">
-<meta name="twitter:description" content="iOS国际化
-storyboard 和 xib文件的国际化">
-<meta name="twitter:image" content="http://7xt1bu.com1.z0.glb.clouddn.com/36.png">
+<meta name="twitter:title" content="自定义 UITableView 的编辑模式">
+<meta name="twitter:description" content="UITableView 的编辑模式下，左滑一个cell，会看到一个红底白字的删除，如果要简单的修改这个样式，可以采取下面这样的方法。直接修改subview，快速有效。
+-(void)layoutSubviews{
+    [super layoutSubviews];
+
+    for (UIView *subView in self.subviews) {
+        if ([subVie">
 
 
 
@@ -116,7 +122,7 @@ storyboard 和 xib文件的国际化">
     }
   };
 </script>
-  <title> storyboard 和 xib文件的国际化 | Aragorn's notes </title>
+  <title> 自定义 UITableView 的编辑模式 | Aragorn's notes </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -266,7 +272,7 @@ storyboard 和 xib文件的国际化">
             
             
               
-                storyboard 和 xib文件的国际化
+                自定义 UITableView 的编辑模式
               
             
           </h1>
@@ -278,8 +284,8 @@ storyboard 和 xib文件的国际化">
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-10-30T09:28:53+08:00" content="2016-10-30">
-              2016-10-30
+            <time itemprop="dateCreated" datetime="2016-12-08T22:45:18+08:00" content="2016-12-08">
+              2016-12-08
             </time>
           </span>
 
@@ -289,8 +295,8 @@ storyboard 和 xib文件的国际化">
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/10/30/AutoGenStrings/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/30/AutoGenStrings/" itemprop="commentsCount"></span>
+                <a href="/2016/12/08/EditTableView/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/08/EditTableView/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -300,7 +306,7 @@ storyboard 和 xib文件的国际化">
 
           
           
-             <span id="/2016/10/30/AutoGenStrings/" class="leancloud_visitors" data-flag-title="storyboard 和 xib文件的国际化">
+             <span id="/2016/12/08/EditTableView/" class="leancloud_visitors" data-flag-title="自定义 UITableView 的编辑模式">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -322,27 +328,25 @@ storyboard 和 xib文件的国际化">
       
 
       
-        <p>iOS国际化</p>
-<p>storyboard 和 xib文件的国际化<br><a id="more"></a><br>每种语言定制一套Storyboard会造成以后需求变更的时候需要同时修改其它语言，比较麻烦。<br>所以采用的是 基于基础的Base StoryBoard以及每种语言一套strings</p>
-<p><img src="http://7xt1bu.com1.z0.glb.clouddn.com/36.png" alt=""></p>
-<p>xib也是一样</p>
-<p><img src="http://7xt1bu.com1.z0.glb.clouddn.com/37.png" alt=""></p>
-<p>不过，相应语言的strings一旦生成后，Base Storyboard或者 Base Xib有任何编辑都不会影响到strings，这就意味着如果我们删除或添加了一个UILabel的text，strings也不能同步改动。</p>
-<p>实际上，storyboard的翻译是由ibtool工具生成的，你可以用terminal进入storyboard所在的目录，输入下面指令，就可以得到一个新的翻译文本</p>
-<blockquote>
-<p>ibtool Main.storyboard –generate-strings-file ./NewTemp.string</p>
-</blockquote>
-<p>但是ibtool生成的strings文件是BaseStoryboard的strings(默认语言的strings)，且会把我们原来的strings替换掉。所以我们要做的就是把新生成的strings与旧的strings进行冲突处理(新的附加上，删除掉的注释掉)，这一切可以用这个python脚本来实现，见<a href="https://raw.githubusercontent.com/mokai/iOS-i18n/master/i18n/RunScript/AutoGenStrings.py" target="_blank" rel="external">AutoGenStrings.py</a>。然后我们将借助Xcode 中 Run Script来运行这段脚本。这样每次Build时都会保证语言strings与Base Storyboard保持一致。</p>
-<p>图中有两个脚本的目的是 storyboard和xib都需要生成一套strings。 需要生成xib的可以修改一下AutoGenStrings.py里的文件类型。</p>
-<p><img src="http://7xt1bu.com1.z0.glb.clouddn.com/38.png" alt=""></p>
-<p><img src="http://7xt1bu.com1.z0.glb.clouddn.com/39.png" alt=""></p>
-<p>strings 使用 key 和 map的格式</p>
-<p><img src="http://7xt1bu.com1.z0.glb.clouddn.com/40.png" alt=""></p>
-<p>这样再配合上Localizable.strings就基本可以做好整个项目的国际化了。还是比较方便的。</p>
-<p>下次有空了再实践下应用内直接切换语言的办法。</p>
-<p>参考:</p>
-<p><a href="http://www.cnblogs.com/levilinxi/p/4296712.html" target="_blank" rel="external">通过脚本使storyboard翻译自增</a></p>
+        <p>UITableView 的编辑模式下，左滑一个cell，会看到一个红底白字的删除，如果要简单的修改这个样式，可以采取下面这样的方法。<br>直接修改subview，快速有效。</p>
+<pre><code>-(void)layoutSubviews{
+    [super layoutSubviews];
 
+    for (UIView *subView in self.subviews) {
+        if ([subView isKindOfClass:NSClassFromString(@&quot;UITableViewCellDeleteConfirmationView&quot;)]) {
+            subView.backgroundColor = [UIColor clearColor];
+            for (UIButton *btn in subView.subviews) {
+                if ([btn isKindOfClass:[UIButton class]]) {
+                    [btn setTitle:@&quot;&quot; forState:UIControlStateNormal];
+                    [btn setTitle:@&quot;&quot; forState:UIControlStateHighlighted];
+                    [btn setImage:[UIImage imageNamed:@&quot;my_collect&quot;] forState:UIControlStateNormal];
+                    btn.backgroundColor=[UIColor clearColor];
+                }
+            }
+        }
+    }
+}
+</code></pre>
       
     </div>
     
@@ -360,28 +364,18 @@ storyboard 和 xib文件的国际化">
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/国际化/" rel="tag">#国际化</a>
-          
-        </div>
-      
 
       
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/10/23/progressView/" rel="next" title="渐变环形进度条">
-                <i class="fa fa-chevron-left"></i> 渐变环形进度条
+              <a href="/2016/11/24/keyboard/" rel="next" title="UIScrollvie 里 keyboard遮挡问题">
+                <i class="fa fa-chevron-left"></i> UIScrollvie 里 keyboard遮挡问题
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/11/06/SocketRocket/" rel="prev" title="SocketRocket">
-                SocketRocket <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -407,8 +401,8 @@ storyboard 和 xib文件的国际化">
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/10/30/AutoGenStrings/"
-           data-title="storyboard 和 xib文件的国际化" data-url="http://seandeng.com/2016/10/30/AutoGenStrings/">
+      <div class="ds-thread" data-thread-key="2016/12/08/EditTableView/"
+           data-title="自定义 UITableView 的编辑模式" data-url="http://seandeng.com/2016/12/08/EditTableView/">
       </div>
     
   </div>
