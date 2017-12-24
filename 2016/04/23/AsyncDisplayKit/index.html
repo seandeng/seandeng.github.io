@@ -321,10 +321,10 @@
       
         <h2 id="1-介绍"><a href="#1-介绍" class="headerlink" title="1.介绍"></a>1.介绍</h2><p>AsyncDisplayKit 是facebook出的iOS框架，主要用来加强复杂的用户交互界面顺畅度和减少响应时间。</p>
 <p>这个东西的效果要去旧一些的设备上才看得出来，多用在比较复杂的UITableview上, 只是普通的需求文字图片排版其实没必要。</p>
-<p>它设计出来的初衷是为了开发facebook 的 <a href="https://www.facebook.com/paper#" target="_blank" rel="noopener">Paper</a>(链接需科学上网)。</p>
+<p>它设计出来的初衷是为了开发facebook 的 <a href="https://www.facebook.com/paper#" target="_blank" rel="external">Paper</a>(链接需科学上网)。</p>
 <a id="more"></a>
 <h2 id="2-集成："><a href="#2-集成：" class="headerlink" title="2.集成："></a>2.集成：</h2><pre><code>pod &apos;AsyncDisplayKit&apos;
-</code></pre><p>如果你使用swift那么要在你的 <a href="https://developer.apple.com/library/ios/documentation/Swift/Conceptual/BuildingCocoaApps/MixandMatch.html" target="_blank" rel="noopener">Objective-C bridging header</a>中加入</p>
+</code></pre><p>如果你使用swift那么要在你的 <a href="https://developer.apple.com/library/ios/documentation/Swift/Conceptual/BuildingCocoaApps/MixandMatch.html" target="_blank" rel="external">Objective-C bridging header</a>中加入</p>
 <pre><code>#import &lt;AsyncDisplayKit/AsyncDisplayKit.h&gt;
 </code></pre><p>AsyncDisplayKit（ASDK）的基本单元是node，ASDisplayNode是UIView之上的抽象层，同时也是CALayer的抽象层。和只能被用在主线程的视图不同，nodes是线程安全的：你能并行的实例化并设置整个node层级，并且在后台线程里运行。</p>
 <h2 id="3-使用："><a href="#3-使用：" class="headerlink" title="3.使用："></a>3.使用：</h2><p>objc:</p>
@@ -337,10 +337,10 @@
 <figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">布局</span><br><span class="line">- (<span class="keyword">void</span>)layout</span><br><span class="line">&#123;</span><br><span class="line">   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>然后就可以在 ASTableView 中使用这个自定义的 ASCellNode了 ， 薄荷的朋友圈timeline用的就是这个。</p>
 <h2 id="5-AsyncDisplayKit包括的组件："><a href="#5-AsyncDisplayKit包括的组件：" class="headerlink" title="5.AsyncDisplayKit包括的组件："></a>5.AsyncDisplayKit包括的组件：</h2><p>· ASDisplayNode. UIView的副本, 一个子类，用来自定义node。<br>· ASControlNode. 类似于UIControl, 用来制作按钮的子类。<br>· ASImageNode. 类似于UIImageView, 异步的解码图像资源。<br>· ASTextNode. 类似于UITextView, 基于TextKit构建，支持富文本的全部特性。<br>· ASTableView. UITableView子类，用于支持node。<br>· ASVideoNode. 刚出的播放视频组件，包装了 AVPlayer, 只有播放和暂停功能，性能还未优化</p>
-<h2 id="6-官方文档："><a href="#6-官方文档：" class="headerlink" title="6.官方文档："></a>6.官方文档：</h2><p>· <a href="http://asyncdisplaykit.org/docs/getting-started.html" target="_blank" rel="noopener">Read the Getting Started guide</a></p>
-<p>例子项目每个都可以单独打开 需要运行下 <code>pod install</code><br>· <a href="https://github.com/facebook/AsyncDisplayKit/tree/master/examples" target="_blank" rel="noopener">Get the sample projects</a></p>
-<p>· <a href="http://asyncdisplaykit.org/appledocs.html" target="_blank" rel="noopener">Browse the API reference</a></p>
-<h2 id="7-除了官方文档以外值得一看的教程："><a href="#7-除了官方文档以外值得一看的教程：" class="headerlink" title="7.除了官方文档以外值得一看的教程："></a>7.除了官方文档以外值得一看的教程：</h2><p>英文：<br><a href="https://github.com/nixzhu/dev-blog/blob/master/2014-11-22-asyncdisplaykit-tutorial-achieving-60-fps-scrolling.md" target="_blank" rel="noopener">asyncdisplaykit-tutorial-achieving-60-fps-scrolling</a><br>中文：<br><a href="http://www.raywenderlich.com/86365/asyncdisplaykit-tutorial-achieving-60-fps-scrolling" target="_blank" rel="noopener">AsyncDisplayKit 教程：达到 60 FPS 的滚动帧率</a></p>
+<h2 id="6-官方文档："><a href="#6-官方文档：" class="headerlink" title="6.官方文档："></a>6.官方文档：</h2><p>· <a href="http://asyncdisplaykit.org/docs/getting-started.html" target="_blank" rel="external">Read the Getting Started guide</a></p>
+<p>例子项目每个都可以单独打开 需要运行下 <code>pod install</code><br>· <a href="https://github.com/facebook/AsyncDisplayKit/tree/master/examples" target="_blank" rel="external">Get the sample projects</a></p>
+<p>· <a href="http://asyncdisplaykit.org/appledocs.html" target="_blank" rel="external">Browse the API reference</a></p>
+<h2 id="7-除了官方文档以外值得一看的教程："><a href="#7-除了官方文档以外值得一看的教程：" class="headerlink" title="7.除了官方文档以外值得一看的教程："></a>7.除了官方文档以外值得一看的教程：</h2><p>英文：<br><a href="https://github.com/nixzhu/dev-blog/blob/master/2014-11-22-asyncdisplaykit-tutorial-achieving-60-fps-scrolling.md" target="_blank" rel="external">asyncdisplaykit-tutorial-achieving-60-fps-scrolling</a><br>中文：<br><a href="http://www.raywenderlich.com/86365/asyncdisplaykit-tutorial-achieving-60-fps-scrolling" target="_blank" rel="external">AsyncDisplayKit 教程：达到 60 FPS 的滚动帧率</a></p>
 
       
     </div>
@@ -452,7 +452,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">35</span>
+              <span class="site-state-item-count">36</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

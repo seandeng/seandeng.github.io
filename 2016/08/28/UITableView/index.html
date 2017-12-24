@@ -345,7 +345,7 @@ UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@&quot;cell
 <pre><code>- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath;
 </code></pre><h3 id="避免阻塞主线程。"><a href="#避免阻塞主线程。" class="headerlink" title="避免阻塞主线程。"></a>避免阻塞主线程。</h3><p>很多时候我们需要从网络请求图片等，把这些操作放在后台执行，并且缓存起来。我们大都使用 SDWebImage 。</p>
 <h3 id="不要动态的add-或者-remove-子控件"><a href="#不要动态的add-或者-remove-子控件" class="headerlink" title="不要动态的add 或者 remove 子控件"></a>不要动态的add 或者 remove 子控件</h3><p>最好在初始化时就添加完，然后通过hidden来控制是否显示。</p>
-<h3 id="使用第三方类库"><a href="#使用第三方类库" class="headerlink" title="使用第三方类库"></a>使用第三方类库</h3><p>现在facebook也推出了自己的类库<a href="https://github.com/facebook/AsyncDisplayKit" target="_blank" rel="noopener">AsyncDisplayKit</a>，可以达到每秒60帧的刷新。<br>不过使用下来觉得学习成本稍微大了一些。</p>
+<h3 id="使用第三方类库"><a href="#使用第三方类库" class="headerlink" title="使用第三方类库"></a>使用第三方类库</h3><p>现在facebook也推出了自己的类库<a href="https://github.com/facebook/AsyncDisplayKit" target="_blank" rel="external">AsyncDisplayKit</a>，可以达到每秒60帧的刷新。<br>不过使用下来觉得学习成本稍微大了一些。</p>
 
       
     </div>
@@ -451,7 +451,7 @@ UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@&quot;cell
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">35</span>
+              <span class="site-state-item-count">36</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

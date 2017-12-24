@@ -332,7 +332,7 @@ storyboard 和 xib文件的国际化">
 <blockquote>
 <p>ibtool Main.storyboard –generate-strings-file ./NewTemp.string</p>
 </blockquote>
-<p>但是ibtool生成的strings文件是BaseStoryboard的strings(默认语言的strings)，且会把我们原来的strings替换掉。所以我们要做的就是把新生成的strings与旧的strings进行冲突处理(新的附加上，删除掉的注释掉)，这一切可以用这个python脚本来实现，见<a href="https://raw.githubusercontent.com/mokai/iOS-i18n/master/i18n/RunScript/AutoGenStrings.py" target="_blank" rel="noopener">AutoGenStrings.py</a>。然后我们将借助Xcode 中 Run Script来运行这段脚本。这样每次Build时都会保证语言strings与Base Storyboard保持一致。</p>
+<p>但是ibtool生成的strings文件是BaseStoryboard的strings(默认语言的strings)，且会把我们原来的strings替换掉。所以我们要做的就是把新生成的strings与旧的strings进行冲突处理(新的附加上，删除掉的注释掉)，这一切可以用这个python脚本来实现，见<a href="https://raw.githubusercontent.com/mokai/iOS-i18n/master/i18n/RunScript/AutoGenStrings.py" target="_blank" rel="external">AutoGenStrings.py</a>。然后我们将借助Xcode 中 Run Script来运行这段脚本。这样每次Build时都会保证语言strings与Base Storyboard保持一致。</p>
 <p>图中有两个脚本的目的是 storyboard和xib都需要生成一套strings。 需要生成xib的可以修改一下AutoGenStrings.py里的文件类型。</p>
 <p><img src="http://7xt1bu.com1.z0.glb.clouddn.com/38.png" alt=""></p>
 <p><img src="http://7xt1bu.com1.z0.glb.clouddn.com/39.png" alt=""></p>
@@ -341,7 +341,7 @@ storyboard 和 xib文件的国际化">
 <p>这样再配合上Localizable.strings就基本可以做好整个项目的国际化了。还是比较方便的。</p>
 <p>下次有空了再实践下应用内直接切换语言的办法。</p>
 <p>参考:</p>
-<p><a href="http://www.cnblogs.com/levilinxi/p/4296712.html" target="_blank" rel="noopener">通过脚本使storyboard翻译自增</a></p>
+<p><a href="http://www.cnblogs.com/levilinxi/p/4296712.html" target="_blank" rel="external">通过脚本使storyboard翻译自增</a></p>
 
       
     </div>
@@ -453,7 +453,7 @@ storyboard 和 xib文件的国际化">
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">35</span>
+              <span class="site-state-item-count">36</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
