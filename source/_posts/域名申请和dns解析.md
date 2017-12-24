@@ -1,5 +1,5 @@
 ---
-title: name.com + DNSPod
+title: 域名申请和dns解析
 date: 2016-04-16 02:14:38
 tags: 
   - name.com

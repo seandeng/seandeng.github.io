@@ -1,5 +1,6 @@
 ---
 title: Hexo安装和配置
+date: 2016-4-13 21:54:37
 tags: Hexo
 ---
 
