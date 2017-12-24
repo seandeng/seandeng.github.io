@@ -1,0 +1,807 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta name="baidu-site-verification" content="UZtJCXgxQh" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Runtime," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="Objective-C Runtime 是什么Objective-C Runtime是一个将C语言转化为面向对象语言的扩展C++和Objective-C都是在C的基础上加入面向对象的特性扩充而成的程序设计语言，但二者实现的机制差异很大">
+<meta name="keywords" content="Runtime">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Objective-C Runtime 基础">
+<meta property="og:url" content="http://seandeng.com/2016/06/18/objc-msgSend/index.html">
+<meta property="og:site_name" content="Aragorn&#39;s notes">
+<meta property="og:description" content="Objective-C Runtime 是什么Objective-C Runtime是一个将C语言转化为面向对象语言的扩展C++和Objective-C都是在C的基础上加入面向对象的特性扩充而成的程序设计语言，但二者实现的机制差异很大">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://7xt1bu.com1.z0.glb.clouddn.com/16.png">
+<meta property="og:image" content="http://7xt1bu.com1.z0.glb.clouddn.com/17.png">
+<meta property="og:updated_time" content="2017-12-24T10:15:22.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Objective-C Runtime 基础">
+<meta name="twitter:description" content="Objective-C Runtime 是什么Objective-C Runtime是一个将C语言转化为面向对象语言的扩展C++和Objective-C都是在C的基础上加入面向对象的特性扩充而成的程序设计语言，但二者实现的机制差异很大">
+<meta name="twitter:image" content="http://7xt1bu.com1.z0.glb.clouddn.com/16.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"always"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+  <title> Objective-C Runtime 基础 | Aragorn's notes </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?ca894c844ac70d7ca815b0096a680219";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta custom-logo">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Aragorn's notes</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Quick notes</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-collect">
+          <a href="/collect" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            收集
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Objective-C Runtime 基础
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-06-18T12:55:46+08:00" content="2016-06-18">
+              2016-06-18
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/06/18/objc-msgSend/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/18/objc-msgSend/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/06/18/objc-msgSend/" class="leancloud_visitors" data-flag-title="Objective-C Runtime 基础">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Objective-C-Runtime-是什么"><a href="#Objective-C-Runtime-是什么" class="headerlink" title="Objective-C Runtime 是什么"></a>Objective-C Runtime 是什么</h2><p>Objective-C Runtime是一个将C语言转化为面向对象语言的扩展<br>C++和Objective-C都是在C的基础上加入面向对象的特性扩充而成的程序设计语言，但二者实现的机制差异很大<br><a id="more"></a></p>
+<p>C++是基于静态类型，而Objective-C是基于动态运行时类型<br>也就是说用C++编写的程序编译时就直接编译成了可令机器读懂的机器语言；用Objective-C编写的程序不能直接编译成可令机器读懂的机器语言，而是在程序运行的时候，通过Runtime把程序转为可令机器读懂的机器语言</p>
+<p>所以啊，想学好Objective-C,还是要学好C。 </p>
+<h2 id="Objective-C的消息传递"><a href="#Objective-C的消息传递" class="headerlink" title="Objective-C的消息传递"></a>Objective-C的消息传递</h2><p>在 Objective-C 中，对象调用方法叫做发送消息。在编译时，程序的源代码就会从对象发送消息转换成Runtime的objc_msgSend函数调用。<br>例如某实例变量receiver实现某一个方法oneMethod</p>
+<pre><code>[receiver oneMethod];
+</code></pre><p>Runtime会将其转成类似这样的代码</p>
+<pre><code>objc_msgSend(receiver, selector);
+</code></pre><p>具体会转换成什么代码呢？<br>Runtime会根据类型自动转换成下列某一个函数：<br>objc_msgSend:普通的消息都会通过该函数发送<br>objc_msgSend_stret:消息中有数据结构作为返回值（不是简单值）时，通过此函数发送和接收返回值<br>objc_msgSendSuper:和objc_msgSend类似，这里把消息发送给父类的实例<br>objc_msgSendSuper_stret:和objc_msgSend_stret类似，这里把消息发送给父类的实例并接收返回值<br>当消息被发送到实例对象时，是如图所示处理的</p>
+<p><img src="http://7xt1bu.com1.z0.glb.clouddn.com/16.png" alt=""></p>
+<p>objc_msgSend函数的调用过程：</p>
+<p>第一步：检测这个selector是不是要忽略的。<br>第二步：检测这个target是不是nil对象。nil对象发送任何一个消息都会被忽略掉。<br>第三步：<br>1.调用实例方法时，它会首先在自身isa指针指向的类（class）methodLists中查找该方法，如果找不到则会通过class的super_class指针找到父类的类对象结构体，然后从methodLists中查找该方法，如果仍然找不到，则继续通过super_class向上一级父类结构体中查找，直至根class；<br>2.当我们调用某个某个类方法时，它会首先通过自己的isa指针找到metaclass，并从其中methodLists中查找该类方法，如果找不到则会通过metaclass的super_class指针找到父类的metaclass对象结构体，然后从methodLists中查找该方法，如果仍然找不到，则继续通过super_class向上一级父类结构体中查找，直至根metaclass；<br>第四步：前三部都找不到就会进入动态方法解析(看下文)。</p>
+<h2 id="消息动态解析"><a href="#消息动态解析" class="headerlink" title="消息动态解析"></a>消息动态解析</h2><p>动态解析流程图</p>
+<p><img src="http://7xt1bu.com1.z0.glb.clouddn.com/17.png" alt=""></p>
+<p>请参照图片品味以下步骤</p>
+<p>第一步：通过resolveInstanceMethod：方法决定是否动态添加方法。如果返回Yes则通过class_addMethod动态添加方法，消息得到处理，结束；如果返回No，则进入下一步；<br>第二步：这步会进入forwardingTargetForSelector:方法，用于指定备选对象响应这个selector，不能指定为self。如果返回某个对象则会调用对象的方法，结束。如果返回nil，则进入第三部；<br>第三部：这步我们要通过methodSignatureForSelector:方法签名，如果返回nil，则消息无法处理。如果返回methodSignature，则进入下一步；<br>第四部：这步调用forwardInvocation：方法，我们可以通过anInvocation对象做很多处理，比如修改实现方法，修改响应对象等，如果方法调用成功，则结束。如果失败，则进入doesNotRecognizeSelector方法，若我们没有实现这个方法，那么就会crash。</p>
+<h2 id="Runtime-例子1"><a href="#Runtime-例子1" class="headerlink" title="Runtime 例子1"></a>Runtime 例子1</h2><p><code>class_getInstanceVariable</code>: 获取一个实例的成员变量值<br><code>objc_allocateClassPair</code>: 创建一个类<br><code>class_addIvar</code>: 为一个类添加成员变量<br><code>sel_registerName</code>: 注册方法<br><code>class_addMethod</code>: 添加方法<br><code>objc_registerClassPair</code>: 注册该类<br><code>object_setIvar</code>: 为实例的成员变量赋值<br><code>objc_disposeClassPair</code>: 销毁类</p>
+<pre><code>#if TARGET_IPHONE_SIMULATOR
+#import &lt;objc/objc-runtime.h&gt;
+#else
+#import &lt;objc/runtime.h&gt;
+#import &lt;objc/message.h&gt;
+#endif
+
+#import &lt;Foundation/Foundation.h&gt;
+
+// 自定义一个方法
+void sayFunction(id self, SEL _cmd, id some) {
+    NSLog(@&quot;%@岁的%@说：%@&quot;, object_getIvar(self, class_getInstanceVariable([self class],&quot;_age&quot;)),
+                          [self valueForKey:@&quot;name&quot;],
+                          some);
+}
+int main(int argc, const char * argv[]) {
+    @autoreleasepool {
+
+        // 动态创建对象 创建一个Person 继承自 NSObject类
+        Class People = objc_allocateClassPair([NSObject class], &quot;Person&quot;, 0);
+
+        // 为该类添加NSString *_name成员变量
+        class_addIvar(People, &quot;_name&quot;, sizeof(NSString*), log2(sizeof(NSString*)), @encode(NSString*));
+        // 为该类添加int _age成员变量
+        class_addIvar(People, &quot;_age&quot;, sizeof(int), sizeof(int), @encode(int));
+
+        // 注册方法名为say的方法
+        SEL s = sel_registerName(&quot;say:&quot;);
+        // 为该类增加名为say的方法
+        class_addMethod(People, s, (IMP)sayFunction, &quot;v@:@&quot;);
+
+        // 注册该类
+        objc_registerClassPair(People);
+
+        // 创建一个类的实例
+        id peopleInstance = [[People alloc] init];
+
+        // KVC 动态改变 对象peopleInstance 中的实例变量
+        [peopleInstance setValue:@&quot;小王&quot; forKey:@&quot;name&quot;];
+
+        // 从类中获取成员变量Ivar
+        Ivar ageIvar = class_getInstanceVariable(People, &quot;_age&quot;);
+        // 为peopleInstance的成员变量赋值
+        object_setIvar(peopleInstance, ageIvar, @18);
+
+        // 调用 peopleInstance 对象中的 s 方法选择器对于的方法
+        // objc_msgSend(peopleInstance, s, @&quot;大家好!&quot;); // 这样写也可以，请看我博客说明
+        ((void (*)(id, SEL, id))objc_msgSend)(peopleInstance, s, @&quot;大家好&quot;);
+
+        peopleInstance = nil; //当People类或者它的子类的实例还存在，则不能调用objc_disposeClassPair这个方法；因此这里要先销毁实例对象后才能销毁类；
+
+        // 销毁类
+        objc_disposeClassPair(People);
+
+    }
+    return 0;
+}
+</code></pre><p>运行打印的值是 </p>
+<pre><code>Runtime[2150:138928] 18岁的小王说：大家好
+</code></pre><p>动态创建一个类，并创建成员变量和方法，最后赋值成员变量并发送消息。其中成员变量的赋值使用了KVC和object_setIvar函数两种方式</p>
+
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Runtime/" rel="tag">#Runtime</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/06/10/runtime/" rel="next" title="Runtime术语">
+                <i class="fa fa-chevron-left"></i> Runtime术语
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/06/19/objc-setAssociatedObject/" rel="prev" title="objc_setAssociatedObject">
+                objc_setAssociatedObject <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/06/18/objc-msgSend/"
+           data-title="Objective-C Runtime 基础" data-url="http://seandeng.com/2016/06/18/objc-msgSend/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="Aragorn" />
+          <p class="site-author-name" itemprop="name">Aragorn</p>
+          <p class="site-description motion-element" itemprop="description">匠心</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">35</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        <div class="links-of-blogroll motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Objective-C-Runtime-是什么"><span class="nav-number">1.</span> <span class="nav-text">Objective-C Runtime 是什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Objective-C的消息传递"><span class="nav-number">2.</span> <span class="nav-text">Objective-C的消息传递</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#消息动态解析"><span class="nav-number">3.</span> <span class="nav-text">消息动态解析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Runtime-例子1"><span class="nav-number">4.</span> <span class="nav-text">Runtime 例子1</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Aragorn</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+<script>
+(function(){
+    var bp = document.createElement('script');
+    bp.src = '//push.zhanzhang.baidu.com/push.js';
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"seandeng"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("6SL8Hg8C37NhcH6QDt7vkLLH-gzGzoHsz", "sxonDECxMyekmDJpMFV2U03o");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+</body>
+</html>

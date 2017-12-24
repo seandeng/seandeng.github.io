@@ -1,0 +1,595 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta name="baidu-site-verification" content="UZtJCXgxQh" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="文章离屏渲染优化UISlider两边有空隙的解决方法iOS移动端架构的那些事后台定位上传的代码实践微信读书 iOS 性能优化总结iOS实时卡顿监控旋屏控制技巧 Xcode git 忽略user interface state文件gitflow OC声明变量在@interface括号中与使用@property的区别Xcode单元测试-XCTestObjective-C中的KVC和KVO 深入理解Ru">
+<meta property="og:type" content="website">
+<meta property="og:title" content="collect">
+<meta property="og:url" content="http://seandeng.com/collect/index.html">
+<meta property="og:site_name" content="Aragorn&#39;s notes">
+<meta property="og:description" content="文章离屏渲染优化UISlider两边有空隙的解决方法iOS移动端架构的那些事后台定位上传的代码实践微信读书 iOS 性能优化总结iOS实时卡顿监控旋屏控制技巧 Xcode git 忽略user interface state文件gitflow OC声明变量在@interface括号中与使用@property的区别Xcode单元测试-XCTestObjective-C中的KVC和KVO 深入理解Ru">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://limboy.me/image/FRP_ReactiveCocoa_large.png">
+<meta property="og:updated_time" content="2017-12-24T10:15:22.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="collect">
+<meta name="twitter:description" content="文章离屏渲染优化UISlider两边有空隙的解决方法iOS移动端架构的那些事后台定位上传的代码实践微信读书 iOS 性能优化总结iOS实时卡顿监控旋屏控制技巧 Xcode git 忽略user interface state文件gitflow OC声明变量在@interface括号中与使用@property的区别Xcode单元测试-XCTestObjective-C中的KVC和KVO 深入理解Ru">
+<meta name="twitter:image" content="http://limboy.me/image/FRP_ReactiveCocoa_large.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"always"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+  <title>
+  
+
+  
+    collect | Aragorn's notes
+  
+</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?ca894c844ac70d7ca815b0096a680219";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left  ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta custom-logo">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Aragorn's notes</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Quick notes</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-collect">
+          <a href="/collect" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            收集
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+    
+      <h2 id="文章"><a href="#文章" class="headerlink" title="文章"></a>文章</h2><p><a href="http://mp.weixin.qq.com/s?__biz=MjM5NTIyNTUyMQ==&amp;mid=2709544818&amp;idx=1&amp;sn=62d0d2e9a363d250beb2d6887dca54b3#rd" target="_blank" rel="noopener">离屏渲染优化</a><br><a href="http://www.ianisme.com/ios/1666.html" target="_blank" rel="noopener">UISlider两边有空隙的解决方法</a><br><a href="http://www.jianshu.com/p/15e5b83ab70e?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=writer_share&amp;utm_source=weibo" target="_blank" rel="noopener">iOS移动端架构的那些事</a><br><a href="http://adad184.com/2015/07/22/how-to-deal-with-background-location-update/" target="_blank" rel="noopener">后台定位上传的代码实践</a><br><a href="http://wereadteam.github.io/2016/05/03/WeRead-Performance/" target="_blank" rel="noopener">微信读书 iOS 性能优化总结</a><br><a href="http://www.tanhao.me/code/151113.html/#more" target="_blank" rel="noopener">iOS实时卡顿监控</a><br><a href="http://blog.csdn.net/yiyaaixuexi/article/details/8035014" target="_blank" rel="noopener">旋屏控制技巧</a></p>
+<p><a href="http://www.cnblogs.com/brance/archive/2016/03/21/5303989.html" target="_blank" rel="noopener">Xcode git 忽略user interface state文件</a><br><a href="http://blog.haohtml.com/archives/15317" target="_blank" rel="noopener">gitflow</a></p>
+<p><a href="http://blog.csdn.net/shenjie12345678/article/details/39052659" target="_blank" rel="noopener">OC声明变量在@interface括号中与使用@property的区别</a><br><a href="http://yulingtianxia.com/blog/2014/04/28/iosdan-yuan-ce-shi-xctest/" target="_blank" rel="noopener">Xcode单元测试-XCTest</a><br><a href="http://yulingtianxia.com/blog/2014/05/12/objective-czhong-de-kvche-kvo/" target="_blank" rel="noopener">Objective-C中的KVC和KVO</a></p>
+<p><a href="http://blog.ibireme.com/2015/05/18/runloop/" target="_blank" rel="noopener">深入理解RunLoop ibireme</a><br><a href="https://www.ianisme.com/ios/2019.html" target="_blank" rel="noopener">Objective-C Runtime 1小时入门教程</a><br><a href="http://www.saitjr.com/ios/objc-runtime.html" target="_blank" rel="noopener">初识Objective-C Runtime</a><br><a href="http://southpeak.github.io/blog/2014/10/25/objective-c-runtime-yun-xing-shi-zhi-lei-yu-dui-xiang/" target="_blank" rel="noopener">Objective-C Runtime 运行时之一：类与对象</a><br><a href="http://yulingtianxia.com/blog/2014/11/05/objective-c-runtime/" target="_blank" rel="noopener">Objective-C Runtime</a></p>
+<p><a href="http://www.jianshu.com/p/7103fbbe1eba" target="_blank" rel="noopener">同时托管博客到github和coding</a></p>
+<p><a href="http://blog.csdn.net/u012947646/article/details/51915985" target="_blank" rel="noopener">关于 iOS 10 中 ATS 的问题</a></p>
+<h3 id="RAC"><a href="#RAC" class="headerlink" title="RAC"></a>RAC</h3><p><img src="http://limboy.me/image/FRP_ReactiveCocoa_large.png" alt=""><br><a href="http://yulingtianxia.com/blog/2014/07/29/reactivecocoa/" target="_blank" rel="noopener">ReactiveCocoa学习笔记</a><br><a href="http://blog.csdn.net/dfqin/article/details/39164241" target="_blank" rel="noopener">ReactiveCocoa使用实例</a></p>
+<h2 id="教程"><a href="#教程" class="headerlink" title="教程"></a>教程</h2><p><a href="http://wiki.jikexueyuan.com/project/swift/" target="_blank" rel="noopener">The Swift Programming Language 中文版</a><br><a href="http://www.hangge.com/blog/cache/category_72_1.html" target="_blank" rel="noopener">Swift 教程</a><br><a href="http://blog.csdn.net/xdrt81y/article/details/30624469" target="_blank" rel="noopener">使用ReactiveCocoa实现iOS平台响应式编程</a></p>
+<h2 id="博客"><a href="#博客" class="headerlink" title="博客"></a>博客</h2><p><a href="http://blog.devtang.com/" target="_blank" rel="noopener">唐巧的技术博客</a><br><a href="http://blog.sunnyxx.com/" target="_blank" rel="noopener">sunnyxx</a><br><a href="http://blog.ibireme.com/" target="_blank" rel="noopener">ibireme的blog</a><br><a href="http://www.jianshu.com/users/b82d2721ba07/latest_articles" target="_blank" rel="noopener">叶孤城</a><br>jspatch作者：<a href="http://blog.cnbang.net/" target="_blank" rel="noopener">bang的blog</a><br><a href="http://xuyafei.cn/" target="_blank" rel="noopener">xuyafei</a><br><a href="http://yulingtianxia.com/" target="_blank" rel="noopener">玉令天下的博客</a><br><a href="http://kittenyang.com/" target="_blank" rel="noopener">kittenyang</a></p>
+<h2 id="Monad"><a href="#Monad" class="headerlink" title="Monad"></a>Monad</h2><p><a href="http://www.mokacoding.com/blog/functor-applicative-monads-in-pictures/" target="_blank" rel="noopener">Swift Functors, Applicatives, and Monads in Pictures</a><br><a href="http://joeyio.com/2016/04/24/RevealMonad/" target="_blank" rel="noopener">揭开 Monad 的神秘面纱</a><br><a href="http://blog.devtang.com/2016/04/05/swift-gym-5-monad/" target="_blank" rel="noopener">Swift 烧脑体操（五）- Monad</a></p>
+<h2 id="Ruby"><a href="#Ruby" class="headerlink" title="Ruby"></a>Ruby</h2><p><a href="http://www.cnblogs.com/daguo/p/4097263.html" target="_blank" rel="noopener">mac下用rvm安装Ruby</a></p>
+<h2 id="轮子"><a href="#轮子" class="headerlink" title="轮子"></a>轮子</h2>
+    
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="collect/index.html"
+           data-title="collect" data-url="http://seandeng.com/collect/index.html">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="Aragorn" />
+          <p class="site-author-name" itemprop="name">Aragorn</p>
+          <p class="site-description motion-element" itemprop="description">匠心</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">35</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        <div class="links-of-blogroll motion-element">
+          
+        </div>
+
+      </section>
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Aragorn</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+<script>
+(function(){
+    var bp = document.createElement('script');
+    bp.src = '//push.zhanzhang.baidu.com/push.js';
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"seandeng"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("6SL8Hg8C37NhcH6QDt7vkLLH-gzGzoHsz", "sxonDECxMyekmDJpMFV2U03o");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+</body>
+</html>
