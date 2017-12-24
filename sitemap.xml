@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://seandeng.com/2016/09/23/iOS10Notifications/</loc>
+    <loc>http://seandeng.com/2016/10/16/iOSHttps/</loc>
     
     <lastmod>2017-12-24T10:15:22.000Z</lastmod>
     
@@ -16,14 +16,14 @@
   </url>
   
   <url>
-    <loc>http://seandeng.com/2016/10/30/AutoGenStrings/</loc>
+    <loc>http://seandeng.com/2016/05/07/Network-Link-Conditioner/</loc>
     
     <lastmod>2017-12-24T10:15:22.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://seandeng.com/2016/05/07/Network-Link-Conditioner/</loc>
+    <loc>http://seandeng.com/2016/12/08/EditTableView/</loc>
     
     <lastmod>2017-12-24T10:15:22.000Z</lastmod>
     
@@ -51,13 +51,6 @@
   </url>
   
   <url>
-    <loc>http://seandeng.com/2016/04/17/Routable-iOS/</loc>
-    
-    <lastmod>2017-12-24T10:15:22.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://seandeng.com/2016/11/06/SocketRocket/</loc>
     
     <lastmod>2017-12-24T10:15:22.000Z</lastmod>
@@ -65,7 +58,7 @@
   </url>
   
   <url>
-    <loc>http://seandeng.com/2016/08/28/UITableView/</loc>
+    <loc>http://seandeng.com/2016/04/17/Routable-iOS/</loc>
     
     <lastmod>2017-12-24T10:15:22.000Z</lastmod>
     
@@ -80,6 +73,13 @@
   
   <url>
     <loc>http://seandeng.com/2016/07/10/bluetooth/</loc>
+    
+    <lastmod>2017-12-24T10:15:22.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://seandeng.com/2016/08/28/UITableView/</loc>
     
     <lastmod>2017-12-24T10:15:22.000Z</lastmod>
     
@@ -128,14 +128,14 @@
   </url>
   
   <url>
-    <loc>http://seandeng.com/2016/10/16/iOSHttps/</loc>
+    <loc>http://seandeng.com/2016/09/23/iOS10Notifications/</loc>
     
     <lastmod>2017-12-24T10:15:22.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://seandeng.com/2016/12/08/EditTableView/</loc>
+    <loc>http://seandeng.com/2016/10/30/AutoGenStrings/</loc>
     
     <lastmod>2017-12-24T10:15:22.000Z</lastmod>
     
@@ -226,14 +226,14 @@
   </url>
   
   <url>
-    <loc>http://seandeng.com/2016/09/03/xcode-Debug/</loc>
+    <loc>http://seandeng.com/2016/06/10/runtime/</loc>
     
     <lastmod>2017-12-24T10:15:22.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://seandeng.com/2016/06/10/runtime/</loc>
+    <loc>http://seandeng.com/2016/09/03/xcode-Debug/</loc>
     
     <lastmod>2017-12-24T10:15:22.000Z</lastmod>
     
